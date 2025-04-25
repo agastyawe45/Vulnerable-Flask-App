@@ -1,10 +1,15 @@
-FROM python:2.7.14-jessie
+FROM python:2.7.18-slim
 
 WORKDIR /apps/
 
 COPY app/ /apps/
 
 WORKDIR /apps/
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    default-libmysqlclient-dev
 
 RUN pip install -U pip setuptools && pip install -r /apps/requirements.txt
 
